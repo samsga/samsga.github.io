@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palavras Certas ou Erradas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .word-container {
+            margin: 20px 0;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button.correct {
+            background-color: #4CAF50;
+            color: white;
+        }
+        button.wrong {
+            background-color: #f44336;
+            color: white;
+        }
+        .feedback {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Palavras Certas ou Erradas</h1>
+    <div class="word-container" id="word">...</div>
+    <div class="buttons">
+        <button class="correct" onclick="checkAnswer(true)">Está Certo</button>
+        <button class="wrong" onclick="checkAnswer(false)">Está Errado</button>
+    </div>
+    <div class="feedback" id="feedback"></div>
+
+    <script>
+        const dictionary = ["abacaxi", "cadeira", "elefante", "janela", "paralelepípedo"];
+        const misspellings = {
+            "abacaxi": "abacashi",
+            "cadeira": "cadeyra",
+            "elefante": "elhefante",
+            "janela": "jhanela",
+            "paralelepípedo": "paralelipipedo"
+        };
+        let currentWord = "";
+        let isCorrect = false;
+
+        function getRandomWord() {
+            const correct = Math.random() < 0.5;
+            const word = dictionary[Math.floor(Math.random() * dictionary.length)];
+            currentWord = correct ? word : misspellings[word];
+            isCorrect = correct;
+            document.getElementById("word").textContent = currentWord;
+            document.getElementById("feedback").textContent = "";
+        }
+
+        function checkAnswer(userThinksCorrect) {
+            const feedback = document.getElementById("feedback");
+            if (userThinksCorrect === isCorrect) {
+                feedback.textContent = "Correto! Você acertou!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = "Errado! Tente novamente.";
+                feedback.style.color = "red";
+            }
+            setTimeout(getRandomWord, 2000);
+        }
+
+        // Inicializa a primeira palavra
+        getRandomWord();
+    </script>
+</body>
+</html>
