@@ -55,40 +55,181 @@
     <div class="feedback" id="feedback"></div>
 
     <script>
-        const dictionary = ["abacaxi", "cadeira", "elefante", "janela", "paralelepípedo"];
+        const dictionary = [
+            "abacaxi", "cadeira", "elefante", "janela", "paralelepípedo", 
+            "banana", "computador", "guitarra", "arco-íris", "floresta",
+            "sapato", "professor", "travesseiro", "ventilador", "livro",
+            "cachorro", "gato", "hospital", "matemática", "história",
+            "biologia", "gramática", "telefone", "carro", "avião",
+            "bicicleta", "escada", "balcão", "copo", "tijolo",
+            "relógio", "espelho", "guarda-roupa", "telefone", "amigo",
+            "festa", "escola", "gelo", "navio", "praia",
+            "ônibus", "brinquedo", "papagaio", "poltrona", "faca",
+            "garfo", "colher", "azul", "verde", "amarelo",
+            "laranja", "limão", "abelha", "borboleta", "cavalo",
+            "zebra", "jacaré", "peixe", "pássaro", "estrelas",
+            "lua", "sol", "planeta", "galáxia", "universo",
+            "música", "dança", "teatro", "pintura", "desenho",
+            "ciência", "física", "química", "engenharia", "medicina",
+            "psicologia", "advogado", "policial", "bombeiro", "cientista",
+            "mecânico", "barco", "trem", "moto", "sapo",
+            "coelho", "macaco", "urso", "tigre", "leão",
+            "camisa", "calça", "meia", "sapato", "chuva",
+            "nuvem", "céu", "montanha", "rio", "lago",
+            "formiga", "girafa", "vassoura", "lâmpada", "sabão",
+            "tapete", "tartaruga", "tigre", "pantera", "fogueira",
+            "janela", "porta", "quadro", "escorregador", "gramado",
+            "barco", "oceano", "árvore", "flor", "montanha",
+            "estrela", "galáxia", "vulcão", "chuva", "nuvem",
+            "ferradura", "cesto", "pandeiro", "flauta", "violino",
+            "chave", "cadeado", "caneta", "lápis", "borracha"
+        ];
+
         const misspellings = {
             "abacaxi": "abacashi",
-            "cadeira": "cadeyra",
-            "elefante": "elhefante",
-            "janela": "jhanela",
-            "paralelepípedo": "paralelipipedo"
+            "cadeira": "cadeeira",
+            "elefante": "elefantte",
+            "janela": "janella",
+            "paralelepípedo": "paralelepipeddo",
+            "banana": "bannana",
+            "computador": "compputador",
+            "guitarra": "guittarra",
+            "arco-íris": "arco-iris",
+            "floresta": "floreessta",
+            "sapato": "sapattto",
+            "professor": "proffessor",
+            "travesseiro": "travesseiiro",
+            "ventilador": "ventiladdor",
+            "livro": "livvro",
+            "cachorro": "cachoorro",
+            "gato": "gatto",
+            "hospital": "hospitaal",
+            "matemática": "matematica",
+            "história": "histooria",
+            "biologia": "biollogia",
+            "gramática": "gramatica",
+            "telefone": "teleffone",
+            "carro": "carrro",
+            "avião": "aviao",
+            "bicicleta": "biciccleta",
+            "escada": "escadda",
+            "balcão": "balcao",
+            "copo": "coppo",
+            "tijolo": "tijjolo",
+            "relógio": "relogio",
+            "espelho": "espellho",
+            "guarda-roupa": "guardaroupa",
+            "amigo": "amigoo",
+            "festa": "fessta",
+            "escola": "esccola",
+            "gelo": "gelllo",
+            "navio": "navvio",
+            "praia": "prraia",
+            "ônibus": "onibus",
+            "brinquedo": "brinqquedo",
+            "papagaio": "papaggaio",
+            "poltrona": "poltronna",
+            "faca": "faacca",
+            "garfo": "garffo",
+            "colher": "colherr",
+            "azul": "azzul",
+            "verde": "verdee",
+            "amarelo": "amarello",
+            "laranja": "laranjaa",
+            "limão": "limao",
+            "abelha": "abeelha",
+            "borboleta": "borboleeta",
+            "cavalo": "cavallo",
+            "zebra": "zebbra",
+            "jacaré": "jacare",
+            "peixe": "peixxe",
+            "pássaro": "passaro",
+            "estrelas": "esttrelas",
+            "lua": "luua",
+            "sol": "sool",
+            "planeta": "planetta",
+            "galáxia": "galaxia",
+            "universo": "universsoo",
+            "música": "musica",
+            "dança": "danca",
+            "teatro": "teattro",
+            "pintura": "pinturra",
+            "desenho": "desenhoo",
+            "ciência": "ciencia",
+            "física": "fisica",
+            "química": "quimica",
+            "engenharia": "engenhariaa",
+            "medicina": "medicinna",
+            "psicologia": "psiccologia",
+            "advogado": "advogaddo",
+            "policial": "policcial",
+            "bombeiro": "bombeiiro",
+            "cientista": "cientissta",
+            "mecânico": "mecanicco",
+            "barco": "barcco",
+            "trem": "treemm",
+            "moto": "mottoo",
+            "sapo": "sappo",
+            "coelho": "coellho",
+            "macaco": "macacco",
+            "urso": "urrso",
+            "tigre": "tigrre",
+            "leão": "leao",
+            "camisa": "camissa",
+            "calça": "calca",
+            "meia": "meiia",
+            "chuva": "chhuva",
+            "nuvem": "nuvemm",
+            "céu": "ceu",
+            "montanha": "montannha",
+            "rio": "riiio",
+            "lago": "laggoo"
         };
-        let currentWord = "";
-        let isCorrect = false;
+
+        let lastWord = "";
 
         function getRandomWord() {
-            const correct = Math.random() < 0.5;
-            const word = dictionary[Math.floor(Math.random() * dictionary.length)];
-            currentWord = correct ? word : misspellings[word];
-            isCorrect = correct;
-            document.getElementById("word").textContent = currentWord;
-            document.getElementById("feedback").textContent = "";
+            let word;
+            do {
+                word = dictionary[Math.floor(Math.random() * dictionary.length)];
+            } while (word === lastWord);
+            lastWord = word;
+            return word;
         }
 
-        function checkAnswer(userThinksCorrect) {
-            const feedback = document.getElementById("feedback");
-            if (userThinksCorrect === isCorrect) {
-                feedback.textContent = "Correto! Você acertou!";
-                feedback.style.color = "green";
+        function displayWord() {
+            const wordElement = document.getElementById("word");
+            const feedbackElement = document.getElementById("feedback");
+            feedbackElement.textContent = "";
+
+            const correctWord = getRandomWord();
+            const isMisspelled = Math.random() < 0.3; // 30% de chance de ser escrito errado
+
+            const displayedWord = isMisspelled && misspellings[correctWord] 
+                ? misspellings[correctWord] 
+                : correctWord;
+
+            wordElement.textContent = displayedWord;
+            wordElement.dataset.correct = displayedWord === correctWord;
+        }
+
+        function checkAnswer(isCorrect) {
+            const wordElement = document.getElementById("word");
+            const feedbackElement = document.getElementById("feedback");
+            const correct = wordElement.dataset.correct === "true";
+
+            if (isCorrect === correct) {
+                feedbackElement.textContent = "Você acertou!";
+                feedbackElement.style.color = "green";
             } else {
-                feedback.textContent = "Errado! Tente novamente.";
-                feedback.style.color = "red";
+                feedbackElement.textContent = "Você errou. Tente novamente!";
+                feedbackElement.style.color = "red";
             }
-            setTimeout(getRandomWord, 2000);
+
+            setTimeout(displayWord, 2000); // Exibe nova palavra após 2 segundos
         }
 
-        // Inicializa a primeira palavra
-        getRandomWord();
+        displayWord();
     </script>
 </body>
 </html>
